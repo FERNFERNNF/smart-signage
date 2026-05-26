@@ -1,91 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>AI Audience Analytics</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0f172a;
-      color: white;
-      text-align: center;
-      padding: 40px;
-    }
+<meta charset="UTF-8">
+<title>Smart Signage AI Analytics</title>
 
-    .card {
-      background: #1e293b;
-      padding: 20px;
-      margin: 10px;
-      border-radius: 12px;
-      display: inline-block;
-      width: 200px;
-    }
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-    .big {
-      font-size: 32px;
-      font-weight: bold;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: Arial;
+  background: #0b1220;
+  color: white;
+}
 
-    button {
-      margin-top: 20px;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      background: #38bdf8;
-      cursor: pointer;
-    }
+header {
+  padding: 20px;
+  text-align: center;
+  background: #111a2e;
+}
 
-    button:hover {
-      background: #0ea5e9;
-    }
-  </style>
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 20px;
+}
+
+.card {
+  background: #16233d;
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.big {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.status {
+  margin: 20px;
+  padding: 15px;
+  background: #1f2d4a;
+  border-radius: 10px;
+  text-align: center;
+}
+
+canvas {
+  background: white;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+button {
+  margin-top: 15px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #38bdf8;
+}
+button:hover {
+  background: #0ea5e9;
+}
+</style>
 </head>
 
 <body>
 
-<h1>🧠 AI Audience Analytics</h1>
+<header>
+  <h1>🧠 Smart Signage AI Analytics</h1>
+  <p>Real-time Audience Simulation System</p>
+</header>
 
-<div class="card">
-  <h3>Total Viewers</h3>
-  <div id="total" class="big">0</div>
+<div class="container">
+
+  <div class="card">
+    <h3>Total Viewers</h3>
+    <div id="total" class="big">0</div>
+  </div>
+
+  <div class="card">
+    <h3>Male</h3>
+    <div id="male" class="big">0</div>
+  </div>
+
+  <div class="card">
+    <h3>Female</h3>
+    <div id="female" class="big">0</div>
+  </div>
+
 </div>
 
-<div class="card">
-  <h3>Male</h3>
-  <div id="male" class="big">0</div>
+<div class="status">
+  🎯 AI Status: <span id="aiStatus">Detecting audience...</span><br>
+  📺 Content: <span id="content">Loading...</span>
 </div>
 
-<div class="card">
-  <h3>Female</h3>
-  <div id="female" class="big">0</div>
+<div style="padding:20px;">
+  <canvas id="chart"></canvas>
 </div>
 
-<br>
-
-<button onclick="updateDashboard()">🔄 Refresh AI Data</button>
+<div style="text-align:center;">
+  <button onclick="updateData()">🔄 Refresh AI</button>
+</div>
 
 <script>
-function getAudienceData() {
+let chart;
+
+function randomData() {
   return {
     total: Math.floor(Math.random() * 300),
-    male: Math.floor(Math.random() * 150),
-    female: Math.floor(Math.random() * 150),
+    male: Math.floor(Math.random() * 200),
+    female: Math.floor(Math.random() * 200),
   };
 }
 
-function updateDashboard() {
-  const data = getAudienceData();
+function updateData() {
+  const data = randomData();
 
   document.getElementById("total").innerText = data.total;
   document.getElementById("male").innerText = data.male;
   document.getElementById("female").innerText = data.female;
+
+  // AI logic จำลอง
+  if (data.total > 200) {
+    document.getElementById("content").innerText = "🔥 Ads: High Traffic Campaign";
+    document.getElementById("aiStatus").innerText = "High Density Audience Detected";
+  } else if (data.total > 100) {
+    document.getElementById("content").innerText = "📢 Ads: Standard Promotion";
+    document.getElementById("aiStatus").innerText = "Normal Audience Flow";
+  } else {
+    document.getElementById("content").innerText = "ℹ️ Info Content Mode";
+    document.getElementById("aiStatus").innerText = "Low Traffic Detected";
+  }
+
+  updateChart(data);
 }
 
-// auto run
-updateDashboard();
+function updateChart(data) {
+  chart.data.datasets[0].data = [data.male, data.female];
+  chart.update();
+}
 
-// auto refresh every 5 seconds (simulate real AI)
-setInterval(updateDashboard, 5000);
+function initChart() {
+  const ctx = document.getElementById('chart');
+
+  chart = new Chart(ctx, {
+    type: 'doughnut',
+    data: {
+      labels: ['Male', 'Female'],
+      datasets: [{
+        data: [0, 0],
+        backgroundColor: ['#38bdf8', '#f472b6']
+      }]
+    }
+  });
+}
+
+initChart();
+updateData();
+
+// auto refresh
+setInterval(updateData, 5000);
+
 </script>
 
 </body>
