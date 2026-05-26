@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Audience Analytics</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      text-align: center;
+      padding: 40px;
+    }
+
+    .card {
+      background: #1e293b;
+      padding: 20px;
+      margin: 10px;
+      border-radius: 12px;
+      display: inline-block;
+      width: 200px;
+    }
+
+    .big {
+      font-size: 32px;
+      font-weight: bold;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      background: #38bdf8;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0ea5e9;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>🧠 AI Audience Analytics</h1>
+
+<div class="card">
+  <h3>Total Viewers</h3>
+  <div id="total" class="big">0</div>
+</div>
+
+<div class="card">
+  <h3>Male</h3>
+  <div id="male" class="big">0</div>
+</div>
+
+<div class="card">
+  <h3>Female</h3>
+  <div id="female" class="big">0</div>
+</div>
+
+<br>
+
+<button onclick="updateDashboard()">🔄 Refresh AI Data</button>
+
+<script>
+function getAudienceData() {
+  return {
+    total: Math.floor(Math.random() * 300),
+    male: Math.floor(Math.random() * 150),
+    female: Math.floor(Math.random() * 150),
+  };
+}
+
+function updateDashboard() {
+  const data = getAudienceData();
+
+  document.getElementById("total").innerText = data.total;
+  document.getElementById("male").innerText = data.male;
+  document.getElementById("female").innerText = data.female;
+}
+
+// auto run
+updateDashboard();
+
+// auto refresh every 5 seconds (simulate real AI)
+setInterval(updateDashboard, 5000);
+</script>
+
+</body>
+</html>
