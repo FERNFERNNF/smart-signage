@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alert System</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section class="alert-section">
+
+  <div class="title-area">
+    <p class="mini-title">ALERT SYSTEM</p>
+
+    <h1>
+      ระบบแจ้งเตือนฉุกเฉิน<br>
+      ทันทีทุกสถานการณ์
+    </h1>
+
+    <p class="sub">
+      รับการแจ้งเตือนแบบ real-time
+      ส่งประกาศฉุกเฉินไปยังจอทุกจุดพร้อมกัน
+    </p>
+  </div>
+
+  <div class="alert-box">
+
+    <!-- LEFT -->
+    <div class="left">
+
+      <p class="live">LIVE ALERTS — <span id="time"></span></p>
+
+      <div id="alerts"></div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+      <h3>SYSTEM STATUS</h3>
+
+      <div class="status-row">
+        <span>จอ Online ทั้งหมด</span>
+        <b>42 / 42</b>
+      </div>
+
+      <div class="status-row">
+        <span>Alert วันนี้</span>
+        <b id="count">0</b>
+      </div>
+
+      <div class="status-row">
+        <span>Critical</span>
+        <b class="red">1</b>
+      </div>
+
+      <div class="status-row">
+        <span>Warning</span>
+        <b class="yellow">2</b>
+      </div>
+
+      <button class="btn">
+        ส่งประกาศฉุกเฉิน →
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
+
+<script src="script.js"></script>
+
+</body>
+</html>
