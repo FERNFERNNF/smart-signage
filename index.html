@@ -1,17 +1,99 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <title>Smart Signage</title>
-</head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alert System</title>
 
+  <link rel="stylesheet" href="style.css">
+</head>
 <body>
 
-  <h1>Smart Signage Control Center</h1>
+  <div class="container">
 
-  <a href="analytics.html">
-    <button>📊 AI Audience Analytics</button>
-  </a>
+    <!-- LEFT -->
+    <div class="left">
+
+      <p class="label">ALERT SYSTEM</p>
+
+      <h1>
+        ระบบแจ้งเตือนฉุกเฉิน <br>
+        ทันทีทุกสถานการณ์
+      </h1>
+
+      <p class="subtitle">
+        รับการแจ้งเตือนแบบ real-time ส่งประกาศฉุกเฉินไปยังจอทุกจอพร้อมกัน
+      </p>
+
+      <div class="alert-card">
+
+        <div class="alert-header">
+          <span>LIVE ALERTS — <span id="clock"></span></span>
+        </div>
+
+        <div id="alertList">
+
+          <div class="alert-item">
+            <span>New Alert #25</span>
+            <span>09:06:57</span>
+          </div>
+
+          <div class="alert-item">
+            <span>New Alert #92</span>
+            <span>09:06:52</span>
+          </div>
+
+          <div class="alert-item">
+            <span>New Alert #56</span>
+            <span>09:06:47</span>
+          </div>
+
+          <div class="alert-item">
+            <span>New Alert #70</span>
+            <span>09:06:33</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+
+      <h2>SYSTEM STATUS</h2>
+
+      <div class="status-item">
+        <span>จอ Online ทั้งหมด</span>
+        <strong>42 / 42</strong>
+      </div>
+
+      <div class="status-item">
+        <span>Alert วันนี้</span>
+        <strong>5</strong>
+      </div>
+
+      <div class="status-item">
+        <span>Critical</span>
+        <strong class="red">1</strong>
+      </div>
+
+      <div class="status-item">
+        <span>Warning</span>
+        <strong class="yellow">2</strong>
+      </div>
+
+      <button onclick="sendEmergency()">
+        ส่งประกาศฉุกเฉิน →
+      </button>
+
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
 
 </body>
 </html>

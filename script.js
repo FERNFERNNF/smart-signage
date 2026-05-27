@@ -1,81 +1,43 @@
-const alertContainer = document.getElementById("alerts");
-const count = document.getElementById("count");
+// script.js
 
-const alertData = [
-  {
-    text:"จอ B-12 Offline",
-    type:"red-alert",
-    time:"17:43"
-  },
-  {
-    text:"CPU usage สูงผิดปกติ",
-    type:"yellow-alert",
-    time:"17:40"
-  },
-  {
-    text:"Content อัปเดตสำเร็จ",
-    type:"green-alert",
-    time:"17:30"
-  }
-];
+// clock
+function updateClock() {
+  const now = new Date();
 
-function renderAlerts(){
+  const time =
+    now.getHours().toString().padStart(2, "0") +
+    ":" +
+    now.getMinutes().toString().padStart(2, "0");
 
-  alertContainer.innerHTML = "";
-
-  alertData.forEach(alert=>{
-
-    const div = document.createElement("div");
-
-    div.className = `alert-item ${alert.type}`;
-
-    div.innerHTML = `
-      <span>${alert.text}</span>
-      <span>${alert.time}</span>
-    `;
-
-    alertContainer.appendChild(div);
-
-  });
-
-  count.innerText = alertData.length;
+  document.getElementById("clock").innerText = time;
 }
 
-renderAlerts();
+setInterval(updateClock, 1000);
+updateClock();
 
-function updateTime(){
+// emergency button
+function sendEmergency() {
+
+  const alertList = document.getElementById("alertList");
+
+  const div = document.createElement("div");
+
+  div.className = "alert-item";
 
   const now = new Date();
 
-  const timeString =
-    now.getHours().toString().padStart(2,'0')
-    + ":"
-    +
-    now.getMinutes().toString().padStart(2,'0');
+  const time =
+    now.getHours().toString().padStart(2, "0") +
+    ":" +
+    now.getMinutes().toString().padStart(2, "0") +
+    ":" +
+    now.getSeconds().toString().padStart(2, "0");
 
-  document.getElementById("time").innerText = timeString;
+  div.innerHTML = `
+    <span>🚨 Emergency Alert</span>
+    <span>${time}</span>
+  `;
+
+  alertList.prepend(div);
+
 }
-
-setInterval(updateTime,1000);
-
-updateTime();
-
-
-// DEMO REALTIME ALERT
-setInterval(()=>{
-
-  const random = Math.floor(Math.random()*100);
-
-  alertData.unshift({
-    text:`New Alert #${random}`,
-    type:"yellow-alert",
-    time:new Date().toLocaleTimeString()
-  });
-
-  if(alertData.length > 5){
-    alertData.pop();
-  }
-
-  renderAlerts();
-
-},5000);
